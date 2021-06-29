@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/eureka-demo/eureka-demo.iml" filepath="$PROJECT_DIR$/eureka-demo/eureka-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka-demo/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/eureka-demo/eureka-server/eureka-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ribbon-demo/eureka-server/eureka-server (1).iml" filepath="$PROJECT_DIR$/ribbon-demo/eureka-server/eureka-server (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/feign-demo/eureka-server/eureka-server (1) (com.example).iml" filepath="$PROJECT_DIR$/feign-demo/eureka-server/eureka-server (1) (com.example).iml" />
+      <module fileurl="file://$PROJECT_DIR$/hystrix-demo/eureka-server/eureka-server (2) (com.example).iml" filepath="$PROJECT_DIR$/hystrix-demo/eureka-server/eureka-server (2) (com.example).iml" />
+      <module fileurl="file://$PROJECT_DIR$/hystrix-dashboard-demo/eureka-server/eureka-server (3) (com.example).iml" filepath="$PROJECT_DIR$/hystrix-dashboard-demo/eureka-server/eureka-server (3) (com.example).iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka-demo/eureka-server02/eureka-server02.iml" filepath="$PROJECT_DIR$/eureka-demo/eureka-server02/eureka-server02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ribbon-demo/eureka-server02/eureka-server02 (1).iml" filepath="$PROJECT_DIR$/ribbon-demo/eureka-server02/eureka-server02 (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/feign-demo/eureka-server02/eureka-server02 (1) (com.example).iml" filepath="$PROJECT_DIR$/feign-demo/eureka-server02/eureka-server02 (1) (com.example).iml" />
+      <module fileurl="file://$PROJECT_DIR$/hystrix-demo/eureka-server02/eureka-server02 (2) (com.example).iml" filepath="$PROJECT_DIR$/hystrix-demo/eureka-server02/eureka-server02 (2) (com.example).iml" />
+      <module fileurl="file://$PROJECT_DIR$/hystrix-dashboard-demo/eureka-server02/eureka-server02 (3) (com.example).iml" filepath="$PROJECT_DIR$/hystrix-dashboard-demo/eureka-server02/eureka-server02 (3) (com.example).iml" />
+      <module fileurl="file://$PROJECT_DIR$/feign-demo/feign-demo.iml" filepath="$PROJECT_DIR$/feign-demo/feign-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hystrix-demo/hystrix-demo.iml" filepath="$PROJECT_DIR$/hystrix-demo/hystrix-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hystrix-dashboard-demo/hystrix-demo (1).iml" filepath="$PROJECT_DIR$/hystrix-dashboard-demo/hystrix-demo (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/hystrix-dashboard-demo/hystrix-turbine/hystrix-turbine.iml" filepath="$PROJECT_DIR$/hystrix-dashboard-demo/hystrix-turbine/hystrix-turbine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hystrix-demo/order-service-feign/order-service-feign.iml" filepath="$PROJECT_DIR$/hystrix-demo/order-service-feign/order-service-feign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hystrix-dashboard-demo/order-service-feign/order-service-feign (1).iml" filepath="$PROJECT_DIR$/hystrix-dashboard-demo/order-service-feign/order-service-feign (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/hystrix-demo/order-service-rest/order-service-rest.iml" filepath="$PROJECT_DIR$/hystrix-demo/order-service-rest/order-service-rest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hystrix-dashboard-demo/order-service-rest/order-service-rest (1).iml" filepath="$PROJECT_DIR$/hystrix-dashboard-demo/order-service-rest/order-service-rest (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/hystrix-demo/product-service/product-service.iml" filepath="$PROJECT_DIR$/hystrix-demo/product-service/product-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hystrix-dashboard-demo/product-service/product-service (1).iml" filepath="$PROJECT_DIR$/hystrix-dashboard-demo/product-service/product-service (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/ribbon-demo/ribbon-demo.iml" filepath="$PROJECT_DIR$/ribbon-demo/ribbon-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka-demo/service-consumer/service-consumer.iml" filepath="$PROJECT_DIR$/eureka-demo/service-consumer/service-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ribbon-demo/service-consumer/service-consumer (1).iml" filepath="$PROJECT_DIR$/ribbon-demo/service-consumer/service-consumer (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/feign-demo/service-consumer/service-consumer (1) (com.example).iml" filepath="$PROJECT_DIR$/feign-demo/service-consumer/service-consumer (1) (com.example).iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka-demo/service-provider/service-provider.iml" filepath="$PROJECT_DIR$/eureka-demo/service-provider/service-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ribbon-demo/service-provider/service-provider (1).iml" filepath="$PROJECT_DIR$/ribbon-demo/service-provider/service-provider (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/feign-demo/service-provider/service-provider (1) (com.example).iml" filepath="$PROJECT_DIR$/feign-demo/service-provider/service-provider (1) (com.example).iml" />
+      <module fileurl="file://$PROJECT_DIR$/ribbon-demo/service-provider02/service-provider02.iml" filepath="$PROJECT_DIR$/ribbon-demo/service-provider02/service-provider02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/feign-demo/service-provider02/service-provider02 (1) (com.example).iml" filepath="$PROJECT_DIR$/feign-demo/service-provider02/service-provider02 (1) (com.example).iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/spring-cloud.iml" filepath="$PROJECT_DIR$/.idea/spring-cloud.iml" />
+    </modules>
+  </component>
+</project>

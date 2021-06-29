@@ -2,17 +2,23 @@ package com.example.service.impl;
 
 import com.example.pojo.Product;
 import com.example.service.ProductService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCollapser;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.netflix.hystrix.contrib.javanica.conf.HystrixPropertiesManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Future;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -27,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
      */
     // --------------------信号量隔离---------start-----------
     // 声明需要服务容错的方法
-    // 信号量隔离
+     //信号量隔离
     @HystrixCommand(commandProperties = {
             // 超时时间，默认 1000ms
             @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",
@@ -52,39 +58,38 @@ public class ProductServiceImpl implements ProductService {
     // --------------------信号量隔离----------end------------
 
     // --------------------线程池隔离---------start-----------
-    /*
     // 声明需要服务容错的方法
     // 线程池隔离
-    @HystrixCommand(groupKey = "order-productService-listPool",// 服务名称，相同名称使用同一个线程池
-            commandKey = "selectProductList",// 接口名称，默认为方法名
-            threadPoolKey = "order-productService-listPool",// 线程池名称，相同名称使用同一个线程池
-            commandProperties = {
-                    // 超时时间，默认 1000ms
-                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",
-                            value = "5000")
-            },
-            threadPoolProperties = {
-                    // 线程池大小
-                    @HystrixProperty(name = "coreSize", value = "6"),
-                    // 队列等待阈值(最大队列长度，默认 -1)
-                    @HystrixProperty(name = "maxQueueSize", value = "100"),
-                    // 线程存活时间，默认 1min
-                    @HystrixProperty(name = "keepAliveTimeMinutes", value = "2"),
-                    // 超出队列等待阈值执行拒绝策略
-                    @HystrixProperty(name = "queueSizeRejectionThreshold", value = "100")
-            }, fallbackMethod = "selectProductListFallback")
-    @Override
-    public List<Product> selectProductList() {
-        System.out.println(Thread.currentThread().getName() + "-----selectProductList-----");
-        // ResponseEntity: 封装了返回数据
-        return restTemplate.exchange(
-                "http://product-service/product/list",
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<Product>>() {
-                }).getBody();
-    }
-    */
+//    @HystrixCommand(groupKey = "order-productService-listPool",// 服务名称，相同名称使用同一个线程池
+//            commandKey = "selectProductList",// 接口名称，默认为方法名
+//            threadPoolKey = "order-productService-listPool",// 线程池名称，相同名称使用同一个线程池
+//            commandProperties = {
+//                    // 超时时间，默认 1000ms
+//                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",
+//                            value = "5000")
+//            },
+//            threadPoolProperties = {
+//                    // 线程池大小
+//                    @HystrixProperty(name = "coreSize", value = "6"),
+//                    // 队列等待阈值(最大队列长度，默认 -1)
+//                    @HystrixProperty(name = "maxQueueSize", value = "100"),
+//                    // 线程存活时间，默认 1min
+//                    @HystrixProperty(name = "keepAliveTimeMinutes", value = "2"),
+//                    // 超出队列等待阈值执行拒绝策略
+//                    @HystrixProperty(name = "queueSizeRejectionThreshold", value = "100")
+//            }, fallbackMethod = "selectProductListFallback")
+//    @Override
+//    public List<Product> selectProductList() {
+//        System.out.println(Thread.currentThread().getName() + "-----selectProductList-----");
+//        // ResponseEntity: 封装了返回数据
+//        return restTemplate.exchange(
+//                "http://product-service/product/list",
+//                HttpMethod.GET,
+//                null,
+//                new ParameterizedTypeReference<List<Product>>() {
+//                }).getBody();
+//    }
+
     // --------------------线程池隔离----------end------------
 
     // 托底数据
@@ -98,19 +103,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     // --------------------请求缓存---------start-----------
-    /*
-    @Cacheable(cacheNames = "orderService:product:list")
-    @Override
-    public List<Product> selectProductList() {
-        // ResponseEntity: 封装了返回数据
-        return restTemplate.exchange(
-                "http://product-service/product/list",
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<Product>>() {
-                }).getBody();
-    }
-    */
+
+//    @Cacheable(cacheNames = "orderService:product:list")
+//    @Override
+//    public List<Product> selectProductList() {
+//        // ResponseEntity: 封装了返回数据
+//        return restTemplate.exchange(
+//                "http://product-service/product/list",
+//                HttpMethod.GET,
+//                null,
+//                new ParameterizedTypeReference<List<Product>>() {
+//                }).getBody();
+//    }
     // --------------------请求缓存----------end------------
 
     /**
@@ -137,14 +141,13 @@ public class ProductServiceImpl implements ProductService {
      */
     // 声明需要服务容错的方法
     // 服务降级
-    @HystrixCommand(fallbackMethod = "selectProductByIdFallback")
-    @Override
-    public Product selectProductById(Integer id) {
-        return restTemplate.getForObject("http://product-service/product/" + id, Product.class);
-    }
+//    @HystrixCommand(fallbackMethod = "selectProductByIdFallback")
+//    @Override
+//    public Product selectProductById(Integer id) {
+//        return restTemplate.getForObject("http://product-service/product/" + id, Product.class);
+//    }
 
     // --------------------服务熔断---------start-----------
-    /*
     // 声明需要服务容错的方法
     // 服务熔断
     @HystrixCommand(commandProperties = {
@@ -167,7 +170,6 @@ public class ProductServiceImpl implements ProductService {
             throw new RuntimeException("查询主键为 1 的商品信息导致异常");
         return restTemplate.getForObject("http://product-service/product/" + id, Product.class);
     }
-    */
     // --------------------服务熔断----------end-----------
 
     // 托底数据
@@ -176,63 +178,69 @@ public class ProductServiceImpl implements ProductService {
     }
 
     // --------------------线程池隔离---------start-----------
-    /*
     // 声明需要服务容错的方法
     // 线程池隔离
-    @HystrixCommand(groupKey = "order-productService-singlePool",// 服务名称，相同名称使用同一个线程池
-            commandKey = "selectProductById",// 接口名称，默认为方法名
-            threadPoolKey = "order-productService-singlePool",// 线程池名称，相同名称使用同一个线程池
-            commandProperties = {
-                    // 超时时间，默认 1000ms
-                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",
-                            value = "5000")
-            },
-            threadPoolProperties = {
-                    // 线程池大小
-                    @HystrixProperty(name = "coreSize", value = "3"),
-                    // 队列等待阈值(最大队列长度，默认 -1)
-                    @HystrixProperty(name = "maxQueueSize", value = "100"),
-                    // 线程存活时间，默认 1min
-                    @HystrixProperty(name = "keepAliveTimeMinutes", value = "2"),
-                    // 超出队列等待阈值执行拒绝策略
-                    @HystrixProperty(name = "queueSizeRejectionThreshold", value = "100")
-            })
-    @Override
-    public Product selectProductById(Integer id) {
-        System.out.println(Thread.currentThread().getName() + "-----selectProductById-----");
-        return restTemplate.getForObject("http://product-service/product/" + id, Product.class);
-    }
-    */
+//    @HystrixCommand(groupKey = "order-productService-singlePool",// 服务名称，相同名称使用同一个线程池
+//            commandKey = "selectProductById",// 接口名称，默认为方法名
+//            threadPoolKey = "order-productService-singlePool",// 线程池名称，相同名称使用同一个线程池
+//            commandProperties = {
+//                    // 超时时间，默认 1000ms
+//                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",
+//                            value = "5000")
+//            },
+//            threadPoolProperties = {
+//                    // 线程池大小
+//                    @HystrixProperty(name = "coreSize", value = "3"),
+//                    // 队列等待阈值(最大队列长度，默认 -1)
+//                    @HystrixProperty(name = "maxQueueSize", value = "100"),
+//                    // 线程存活时间，默认 1min
+//                    @HystrixProperty(name = "keepAliveTimeMinutes", value = "2"),
+//                    // 超出队列等待阈值执行拒绝策略
+//                    @HystrixProperty(name = "queueSizeRejectionThreshold", value = "100")
+//            })
+//    @Override
+//    public Product selectProductById(Integer id) {
+//        System.out.println(Thread.currentThread().getName() + "-----selectProductById-----");
+//        return restTemplate.getForObject("http://product-service/product/" + id, Product.class);
+//    }
     // --------------------线程池隔离----------end------------
 
     // --------------------请求合并---------start-----------
-    /*
+
     // 处理请求合并的方法一定要支持异步，返回值必须是 Future<T>
     // 合并请求
-    @HystrixCollapser(batchMethod = "selectProductListByIds", // 合并请求方法
-            scope = com.netflix.hystrix.HystrixCollapser.Scope.GLOBAL, // 请求方式
-            collapserProperties = {
-                    // 间隔多久的请求会进行合并，默认 10ms
-                    @HystrixProperty(name = "timerDelayInMilliseconds", value = "20"),
-                    // 批处理之前，批处理中允许的最大请求数
-                    @HystrixProperty(name = "maxRequestsInBatch", value = "200")
-            })
-    @Override
-    public Future<Product> selectProductById(Integer id) {
-        System.out.println("-----orderService-----selectProductById-----");
-        return null;
-    }
-    */
+//    @HystrixCollapser(batchMethod = "selectProductListByIds", // 合并请求方法
+//            scope = com.netflix.hystrix.HystrixCollapser.Scope.GLOBAL, // 请求方式
+//            collapserProperties = {
+//                    // 间隔多久的请求会进行合并，默认 10ms
+//                    @HystrixProperty(name = "timerDelayInMilliseconds", value = "20"),
+//                    // 批处理之前，批处理中允许的最大请求数
+//                    @HystrixProperty(name = "maxRequestsInBatch", value = "200")
+//            })
+//    @Override
+//    public Future<Product> selectProductById(Integer id) {
+//        System.out.println("-----orderService-----selectProductById-----");
+//        return null;
+//    }
+
     // --------------------请求合并----------end------------
 
-    // --------------------请求缓存---------start-----------
-    /*
-    @Cacheable(cacheNames = "orderService:product:single", key = "#id")
+
+
+//    @Cacheable(cacheNames = "orderService:product:single", key = "#id")
+//    @Override
+//    public Product selectProductById(Integer id) {
+//        return restTemplate.getForObject("http://product-service/product/" + id, Product.class);
+//    }
+
+    @CacheEvict(cacheNames = "orderService:product:single", key = "#id")
     @Override
-    public Product selectProductById(Integer id) {
-        return restTemplate.getForObject("http://product-service/product/" + id, Product.class);
+    public Product deleteCacheProductById(Integer id) {
+        return null;
     }
-    */
-    // --------------------请求缓存----------end------------
+    @CacheEvict(cacheNames = "orderService:product:list")
+    @Override
+    public void deleteCacheProductListById() {
+    }
 
 }

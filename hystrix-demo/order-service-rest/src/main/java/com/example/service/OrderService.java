@@ -28,4 +28,17 @@ public interface OrderService {
      */
     Order searchOrderById(Integer id);
 
+    /**
+     * 根据主键删除订单订单
+     *
+     * @param id
+     * @return
+     */
+    void deleteCacheOrderById(Integer id);
+
+    /**
+     * 删除列表缓存
+     */
+    void deleteCacheProductListById();
+
 }

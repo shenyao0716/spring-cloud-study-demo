@@ -48,4 +48,21 @@ public class OrderController {
         return orderService.searchOrderById(id);
     }
 
+    /**
+     * 根据主键删除缓存
+     * @param id
+     */
+    @GetMapping("/{id}/delete/product")
+    public void deleteCacheOrderById(@PathVariable("id") Integer id){
+       orderService.deleteCacheOrderById(id);
+    }
+
+    /**
+     * 删除列表缓存
+     */
+    @GetMapping("/delete/product")
+    public void deleteCacheOrderById(){
+        orderService.deleteCacheProductListById();
+    }
+
 }

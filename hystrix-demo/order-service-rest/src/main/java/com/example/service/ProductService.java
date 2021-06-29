@@ -3,6 +3,7 @@ package com.example.service;
 import com.example.pojo.Product;
 
 import java.util.List;
+import java.util.concurrent.Future;
 
 public interface ProductService {
 
@@ -29,7 +30,20 @@ public interface ProductService {
      */
     Product selectProductById(Integer id);
     // --------------------请求合并---------start-----------
-    // Future<Product> selectProductById(Integer id);
+//     Product selectProductById(Integer id);
     // --------------------请求合并---------end-------------
 
+    /**
+     * 删除缓存
+     * @param id
+     * @return
+     */
+    Product deleteCacheProductById(Integer id);
+
+    /**
+     * 删除列表缓存
+     */
+    void deleteCacheProductListById();
+
+//    Future<Product> selectProductById(Integer id);
 }

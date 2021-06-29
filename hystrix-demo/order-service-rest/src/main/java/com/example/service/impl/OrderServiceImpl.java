@@ -1,12 +1,15 @@
 package com.example.service.impl;
 
 import com.example.pojo.Order;
+import com.example.pojo.Product;
 import com.example.service.OrderService;
 import com.example.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -51,29 +54,39 @@ public class OrderServiceImpl implements OrderService {
                 Arrays.asList(productService.selectProductById(id)));
     }
 
-    // --------------------请求合并---------start-----------
-    /*
-    public Order searchOrderById(Integer id) {
-        // 模拟同一时间用户发起多个请求。
-        Future<Product> p1 = productService.selectProductById(1);
-        Future<Product> p2 = productService.selectProductById(2);
-        Future<Product> p3 = productService.selectProductById(3);
-        Future<Product> p4 = productService.selectProductById(4);
-        Future<Product> p5 = productService.selectProductById(5);
-        try {
-            System.out.println(p1.get());
-            System.out.println(p2.get());
-            System.out.println(p3.get());
-            System.out.println(p4.get());
-            System.out.println(p5.get());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        return new Order(id, "order-003", "中国", 29000D, null);
+    @Override
+    public void deleteCacheOrderById(Integer id) {
+           productService.deleteCacheProductById(id);
     }
-    */
+
+    @Override
+    public void deleteCacheProductListById() {
+
+    }
+
+    // --------------------请求合并---------start-----------
+//    @Override
+//    public Order searchOrderById(Integer id) {
+//        // 模拟同一时间用户发起多个请求。
+//        Future<Product> p1 = productService.selectProductById(1);
+//        Future<Product> p2 = productService.selectProductById(2);
+//        Future<Product> p3 = productService.selectProductById(3);
+//        Future<Product> p4 = productService.selectProductById(4);
+//        Future<Product> p5 = productService.selectProductById(5);
+//        try {
+//            System.out.println(p1.get());
+//            System.out.println(p2.get());
+//            System.out.println(p3.get());
+//            System.out.println(p4.get());
+//            System.out.println(p5.get());
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        }
+//        return new Order(id, "order-003", "中国", 29000D, null);
+//    }
+
     // --------------------请求合并----------end------------
 
 }

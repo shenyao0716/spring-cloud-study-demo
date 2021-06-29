@@ -45,6 +45,7 @@ public class RedisConfig {
                 // 设置 key 和 value 的序列化
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisTemplate.getKeySerializer()))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(redisTemplate.getValueSerializer()));
+
         return new RedisCacheManager(redisCacheWriter, redisCacheConfiguration);
     }
 
